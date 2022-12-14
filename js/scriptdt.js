@@ -1,0 +1,22 @@
+    $(document).ready(function(){
+        $('#eps').DataTable({
+                searchPanes:{
+                    cascadePanes:true,
+                    dtOpts:{
+                        dom:'tp',
+                        paging:'true',
+                        pagingType:'simple',
+                        searching:false
+                    }
+                },
+                dom:'Pfrtip',
+                columnDefs:[{
+                    searchPanes:{
+                        show:false
+                    },
+                    targets:[0,3,5],
+                }
+                ]
+        });
+
+    });

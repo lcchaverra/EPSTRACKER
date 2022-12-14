@@ -1,0 +1,475 @@
+/* Reseteo de los parametros iniciales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* definicion de la fuente */
+@font-face {
+    font-family:'Product Sans';
+    src: url('/files/ProductSans-Regular.ttf');
+}
+
+:root {
+    --bg-color: #eee;
+    --bg-color-2: #fff;
+    --text-color:#53575A;
+    --accent-color: #2a407296;
+    --font: 'Product Sans', sans-serif; 
+    --shadow: 2px 2px 7px 0 rgba(255, 255, 255, 0.795);
+    --header-height: 4rem;
+    --max-width: 1200px;
+    --section-spacing: 8rem;
+    font-family: var(--font);
+}
+
+/* Media Query para adaptar el color al mismo del sistema */
+/* @media (prefers-color-scheme :dark) {
+    :root {
+        --bg-color    : #53575A;
+        --bg-color-2  : #282D31;
+        --text-color  : #eee;
+        --accent-color: #FF3C32;
+        --font        : 'Lato', sans-serif
+        --shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.795);
+    } 
+} */
+
+/* Organizacion del Layout */
+body{
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: var(--bg-color);
+}
+
+header{
+    padding: 1em;
+    background-color: var(--bg-color-2);
+    box-shadow: 3px 3px 5px rgba(112, 126, 132, 0.1);
+}
+
+main {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    color: var(--text-color);
+}
+
+footer {
+    background-color: var(--bg-color-2);
+    padding: 1em;
+    text-align: center;
+    color: var(--text-color);
+}
+
+/* Menu */
+.menu {
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;    
+}  
+
+.menu{
+    width: 50%;
+    /* height: 3rem; */
+    background: var(--bg-color);
+}
+
+.menu__item {
+    border-bottom: 1px solid var(--bg-color-2);
+    position: relative;
+}
+
+.menu__item:hover{
+    background: var(--accent-color);
+    border-radius: 1rem;
+}
+
+.menu a {
+    display: block;
+    padding: .75em 1em;
+} 
+
+.menu.active {
+    display: block;
+}
+
+/* Logo Menu */
+
+.menu img{
+    height: 1.5rem;
+  }
+
+/* Agregando flexbox al menu */
+ 
+@media screen and (min-width:960px) {
+.menu{
+    display: flex;
+    width: 100%;
+}   
+
+.menu a {
+    text-align: center;
+}
+
+.menu__item {
+    flex:1;
+    border-bottom: none;
+    border-right: solid 1px var(--bg-color-2);
+    } 
+}
+
+/* ------------------Sub Menu para Temas*/
+
+.submenu {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    background-color: var(--bg-color-2);
+    color: var(--text-color);
+    display: none;
+}
+
+.submenu .submenu {
+    left:100%;
+    top: 0;
+}
+
+
+.menu__item:hover > .submenu {
+    display: flex;
+    z-index: 1000;
+    height: 4rem;
+}
+
+.menu__item:hover > .submenu p {
+    text-align: center;
+}
+
+/* ----------------- Icono de hamburguesa dibujado a css */
+
+.button {
+    width: 3rem;
+    height: 1.75rem;
+    background: var(--bg-color-2);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.25s;
+}
+
+.button::before, .button::after {
+    content: '';
+    display: block;
+}
+
+.button::before, .button::after, .line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);  
+    position: absolute;
+}
+
+.button::before { 
+    top: 0;
+}
+
+.line {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.button::after {
+    bottom: 0;
+} 
+
+/* Boton en su estado activo */
+
+.button.active {
+    transform: rotate(180deg);
+}
+
+.button.active .line {
+    display: none;
+}
+
+.button.active::before {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.button.active::after {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+@media screen and (min-width:960px) {
+    .button {
+        display: none;
+    }
+}
+
+/* Separador de Contenido -------------------*/
+.content-wrapper{
+    width: calc(100% - 2rem);
+    max-width: var(--max-width);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+  
+@media screen and (min-width: 1024px){
+    .content-wrapper{
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+   }  
+}
+/*    Contenedores para cada seccion */
+.section-container{
+    margin-bottom: var(--section-spacing);
+}
+  
+.section-container h1, .section-container h2 {
+    text-align: center;
+}
+/* --------------------- Botones -------------------- */
+
+.buttom-blue {
+    margin-left: 1.5rem;
+    border-radius: 1rem;
+    border: none;
+    color: var(--bg-color);
+    width: 8rem;
+    height: 2.1rem;
+    padding: .45em 1.7em;
+    text-decoration: none;
+    text-align: center;
+    transition: all .3s;
+    background-color: var(--bg-color);
+}
+
+.buttom-blue:hover {
+    width: 9rem;
+    height: 2.3rem;
+    padding: 0.5em 2.1em;
+    box-shadow: var(--shadow);
+    background-color: var(--bg-color-2);
+}
+
+.buttom-blue.ghost {
+    background-color: transparent;
+    border: 2px solid var(--bg-color);
+    
+}
+.buttom-blue.ghost1 {
+    background-color: transparent;
+    border: 2px solid var(--bg-color);
+    color: #53575A;
+    border-bottom-color:#53575A;
+    border-color:#53575A;
+}
+
+/* ----------------------Baner Principal------------------------ */
+
+.main-welcome-banner {
+    position: relative;
+    padding: 1em;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    height: 15rem;
+}
+
+.main-welcome-banner .content-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.center-buttom {
+    text-align: center;
+    color:  var(--text-color);
+    
+}
+
+.main-welcome-banner h2 {
+    margin-bottom: 1rem;
+}
+
+.main-welcome-banner p {
+    opacity: 0.85;
+    margin-bottom: 4rem;
+}
+
+.main-welcome-banner .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.main-welcome-banner .content {
+    display: grid;
+    gap: 2rem
+  }
+
+@media screen and (min-width: 1024px) {
+    .main-banner .content {
+      grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Seccion de Servicios ------------------------------------------*/
+
+.services-section .content-wrapper {
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+}
+  
+@media screen and (min-width: 1024px) {
+.services-section .content-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+    }
+}
+  
+.service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 300px;
+    margin: 0 auto;
+}
+.services-section h2 {
+    margin-bottom: 0.6rem;
+}
+.service-item h3 {
+    margin-bottom: 0.6rem;
+}
+  
+.service-item p {
+    margin-bottom: 0;
+}
+/* ---------------------- Formulario de Inscripcion ---------------------*/
+
+h1{
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 800;
+}
+
+form{
+    background: var(--bg-color-2);
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.form{
+    margin: auto;
+    margin-bottom: 4rem;
+}
+
+form .grupo{
+    position: relative;
+    margin: 45px;
+}
+
+.form input, textarea{
+    background: none;
+    color:var(--text-color);
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border:none;
+    border-bottom: 1px solid var(--text-color);
+    resize: none;
+}
+
+input:focus,textarea:focus{
+    outline: none;
+    color: rgb(94,93,93);
+}
+
+/* input:focus~label, 
+input:valid~label, 
+textarea:focus~label, textarea:valid~label{
+    position: absolute;
+    top: -14px;
+    font-size: 12px;
+} */
+/* 
+label{
+    color: var(--colorTextos);
+    font-size: 16px;
+    position: absolute;
+    left: 5px;
+    top:10px;
+    transition: 0.5s ease all;
+    pointer-events: none;
+} */
+
+button{
+    background: #2a407296;
+    display: block;
+    width: 100px;
+    height: 40px;
+    border:none;
+    color:var(--bg-color); 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+    #txt2{
+    padding: 50px;
+    text-align: center;
+    text-align: justify;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.form_con {
+    margin-left: 12rem;
+    width: 70vw;
+    margin-bottom: 3rem;
+}
+
+.form_con h2 {
+    text-align: center;
+    margin: 2rem 2rem;
+}
+
+.form_con .table_con, tr, td {
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    border-collapse: collapse;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    box-sizing: var(--shadow);
+}
+
+/* carrusel de imagenes  */
+
+
+
+/* ------------------------------------------------------------------------------------- */
